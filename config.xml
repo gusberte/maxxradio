@@ -23,7 +23,10 @@
   <feature name="http://api.phonegap.com/1.0/network"/>
   <gap:plugin name="org.apache.cordova.inappbrowser" />
 
-  <platform name="ios">
+  <preference name="SplashScreen" value="screen"/>
+  <preference name="SplashScreenDelay" value="3000"/>
+
+  <!-- PLATFORM IOS -->
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />
     </feature>
@@ -54,8 +57,9 @@
     <splash src="resources/ios/splash/Default-Portrait~ipad.png" width="768" height="1024"/>
     <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
-  </platform>
-  <platform name="android">
+  <!-- PLATFORM IOS END -->
+
+  <!-- PLATFORM ANDROID -->
     <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     <feature name="Geolocation">
         <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
@@ -78,8 +82,6 @@
     <splash src="resources/android/splash/drawable-port-xhdpi-screen.png" density="port-xhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
-  </platform>
-  <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
-  <preference name="SplashScreen" value="screen"/>
-  <preference name="SplashScreenDelay" value="3000"/>
+  <!-- PLATFORM ANDROID END -->
+
 </widget>
