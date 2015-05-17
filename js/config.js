@@ -29,14 +29,15 @@ var Config=  (function(){
 			$.post(Config.serviceJson+"/back/api/web/getconfig", 
 	            function(data){
 	                var obj = eval(data);
+	                console.log(obj[0].fbAppId);
 
-	                fbAppId = obj.fbAppId;
-	                googleId = obj.googleId;
-					loadAdsInterval = obj.fbAppId;
-					if( obj.durationAdsIntro != undefined) durationAdsIntro= obj.durationAdsIntro;
-					if( obj.changeAds1Interval != undefined) changeAds1Interval= obj.changeAds1Interval;
-					if( obj.changeAds2Interval != undefined) changeAds2Interval= obj.changeAds2Interval;
-					if( obj.changeAds3Interval != undefined) changeAds3Interval = obj.changeAds3Interval;
+	                Config.fbAppId = obj[0].fbAppId;
+	                Config.googleId = obj[0].googleId;
+					Config.loadAdsInterval = obj[0].fbAppId;
+					if( obj[0].durationAdsIntro != undefined) Config.durationAdsIntro= obj[0].durationAdsIntro;
+					if( obj[0].changeAds1Interval != undefined) Config.changeAds1Interval= obj[0].changeAds1Interval;
+					if( obj[0].changeAds2Interval != undefined) Config.changeAds2Interval= obj[0].changeAds2Interval;
+					if( obj[0].changeAds3Interval != undefined) Config.changeAds3Interval = obj[0].changeAds3Interval;
 		    		onComplete();
 	            }
 	        );

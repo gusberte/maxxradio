@@ -297,6 +297,8 @@ body,
     overflow: hidden;
     width: 100%;
     height: 100%;
+      margin: 0px;
+  padding: 0px;
 }
 
 .container {
@@ -476,7 +478,7 @@ body,
 .menu-wrap, .menu-wrap-secondary {
     position: absolute;
     z-index: 1001;
-    width: 60%;
+    width: 100%;
     height: 100%;
     font-size: 1.15em;
     -webkit-transform: translate3d(-100%,0,0);
@@ -497,12 +499,22 @@ body,
     overflow-y: auto;
     padding: 50px 10px 0px 0px;
     position: relative;
-    width: 100%;
+    width: 60%;
     z-index: 1001;
 }
 .menu-wrap-secondary .menu{
-    width:100%;
     background: none repeat scroll 0 0 #000;
+    width: 60%;
+    margin-left: 40%;
+}
+
+.menu-wrap-secondary .back, .menu-wrap .back{
+      display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 .icon-list {

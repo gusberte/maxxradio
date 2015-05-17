@@ -159,6 +159,8 @@ var openFB = (function () {
         var queryString,
             obj;
 
+            console.log("i am here");
+
         loginProcessed = true;
         if (url.indexOf("access_token=") > 0) {
             queryString = url.substr(url.indexOf('#') + 1);

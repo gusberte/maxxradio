@@ -26,12 +26,11 @@
 
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="css/normalize.css">
+
     <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <script src="js/vendor/modernizr-2.7.1.min.js"></script>
-    <script src="js/snap.svg-min.js"></script>
+
 
 </head>
 <body>
@@ -39,7 +38,9 @@
 
 <div class="container">
     <div class="menu-wrap">
+        
         <nav class="menu">
+            <button class="close-button" id="close-button">Close Menu</button>
             <div class="icon-list">
                 <!--
                 <a href="#last10" class="mix-over" ><i class="fa fa-fw fa-star-o"></i><span>Last 10 songs</span></a>
@@ -58,8 +59,8 @@
                 <a href="#" class="ad3 advertising" rel="external"><img src="" border="0" width="100%"/></a>
             </div>
         </nav>
-        <button class="close-button" id="close-button">Close Menu</button>
-        <div class="morph-shape" id="morph-shape" data-morph-open="M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z">
+        <div class="back"></div>
+        <div class="morph-shape" style="display:none" id="morph-shape" data-morph-open="M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z">
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
                 <path d="M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z"/>
             </svg>
@@ -68,6 +69,7 @@
     </div>
     <div class="menu-wrap-secondary">
         <nav class="menu">
+            <button class="close-button-secondary" id="close-button-secondary">Close Menu</button>
             <header>
                 <a class="close" href="#">
                     <i class="icomoon icon-websites"> </i>
@@ -77,7 +79,7 @@
                 
             </div>
         </nav>
-        <button class="close-button-secondary" id="close-button-secondary">Close Menu</button>
+        <div class="back"></div>
     </div>  
     <div class="content-wrap">
         <div class="content"> 
@@ -208,33 +210,6 @@
             <div class="advertise page center">
                 <button class="close-button">Cerrar</button>
                 <div class="ad1"></div>
-            </div>
-
-            <div id="browser" class="page right">
-                <button class="close-button">Close Menu</button>
-            </div>
-
-            <div id="last10" class="page right">
-                <button class="close-button">Close</button>
-                <div class="wrapp">
-                    <header>
-                        <a href="#" class="close">
-                            <i class="fa fa-music"></i>
-                        </a>
-                    </header>
-                    <div class="over-content">
-                        <ul class="last">
-                            <li>
-                                <h3>Vanilla Ice</h3>
-                                <p>Ice Ice Baby</p>
-                            </li>
-                            <li>
-                                <h3>Vanilla Ice</h3>
-                                <p>Ice Ice Baby</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
 
             <div id="social-networks" class="page right">
@@ -384,33 +359,35 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div><!-- /content-wrap -->
 </div><!-- /container -->
 
-<script src="js/vendor/jquery-2.1.0.min.js"></script>
-<script src="js/vendor/openfb.js"></script>
-<script src="js/helper.js"></script>
-<script src="js/jquery.jplayer.min.js"></script>
-<script src="js/swiper.jquery.js"></script>
-<script src="js/swiper.js"></script>
-<script src="js/config.js"></script>
-<script src="js/db.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/app.js"></script>
-<script>
+    <script src="js/vendor/jquery-2.1.0.min.js"></script>
+    <script src="js/vendor/snap.svg-min.js"></script>
+    <script src="js/vendor/openfb.js"></script>
+    <script src="js/vendor/jquery.jplayer.min.js"></script>
+    <script src="js/vendor/swiper.jquery.js"></script>
+    <script src="js/vendor/swiper.js"></script>
+    <script src="js/vendor/fastclick.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+    $(document).ready(function(){
+        FastClick.attach(document.body);
+    });
     document.addEventListener("deviceready", App.init(), false);
-</script>
-<script>
-    var googleId='UA-XXXXX-X';
-    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+    </script>
+    <script>
+        var googleId='UA-XXXXX-X';
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
         function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
         e=o.createElement(i);r=o.getElementsByTagName(i)[0];
         e.src='//www.google-analytics.com/analytics.js';
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-    ga('create',googleId);ga('send','pageview');
-</script>
+        ga('create',googleId);ga('send','pageview');
+    </script>
 </body>
 </html>

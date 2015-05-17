@@ -139,7 +139,6 @@ var App = (function(){
         });
     }
 
-
     var getUserId = function( onComplete ){
         var dbConn = new DB();
         dbConn.execute("CREATE TABLE IF NOT EXISTS maxradio (userid)",function(){
@@ -154,6 +153,15 @@ var App = (function(){
     }
 
     var initEvents = function(){
+
+        $(".menu-wrap .back").click(function(){
+            toggleMenu();
+        }); 
+
+        $(".menu-wrap-secondary .back").click(function(){
+            toggleMenu2();
+        });
+
         $(".advertise .close-button").click(function(){
             closeAdvertise1();
         });  
@@ -163,9 +171,19 @@ var App = (function(){
         }); 
 
         $(".login .face").click(function(){
-            openFB.login(function(){
-                console.log(Config.fbAppId);
-            }, {scope: 'email'});
+            openFB.login(
+                function(response) {
+                    console.log("Respuesta: ".response.status);
+                    if (response.status === 'connected') {
+                        console.log('Facebook login succeeded');
+                        $scope.closeLogin();
+                    } else {
+                        alert('Facebook login failed');
+                    }
+                },
+                {scope: 'email'});
+        
+
         });
 
         $(".login .submit").click(function(){
@@ -188,11 +206,6 @@ var App = (function(){
                     }
                 }
             );
-        });
-
-        $(".navigate").click(function(){
-            $(".browser iframe").attr("src",$(this).attr('href'));
-            $(".browser").attr("class","page transition center");
         });
 
         openbtn.addEventListener( 'click', toggleMenu );
@@ -236,8 +249,9 @@ var App = (function(){
             return false;
         });
 
-        $(document).on( "click", ".playstation", function(e) {
+        $(document).on('click',".playstation", function(e) {
             e.preventDefault();
+
             my_jPlayer.jPlayer("setMedia", {
                 mp3: $(this).attr("href")
             });
@@ -250,10 +264,8 @@ var App = (function(){
         $('a.mix-over').click(function(e){
             e.preventDefault();
             
-            $('body').removeClass('show-menu');
+            toggleMenu();
 
-            console.log("here");
-            
             if($(this).attr('href') == "#events") {
                 loadEvents(function(){
                     $('.page').not('.player,'+$(this).attr('href')).attr("class","page transition right");
