@@ -3,6 +3,9 @@ var App = (function(){
     var adFlag=0;
     var closeAds=true;
     var discos;
+    var advertises1 = new Array();
+    var advertises2 = new Array();
+    var advertises3 = new Array();
 
     var bodyEl = document.body,
         content = document.querySelector( '.content-wrap' ),
@@ -35,9 +38,6 @@ var App = (function(){
     // A flag to capture the first track
     var first_track = true;
 
-    var advertises1 = new Array();
-    var advertises2 = new Array();
-    var advertises3 = new Array();
 
 
     var mask = function(){
@@ -66,30 +66,29 @@ var App = (function(){
     };
 
     var toggleMenu =  function() {
-            if( isAnimating ) return false;
-            isAnimating = true;
-            if( isOpen ) {
-                classie.remove( bodyEl, 'show-menu' );
-                // animate path
-                setTimeout( function() {
-                    // reset path
-                    path.attr( 'd', initialPath );
-                    isAnimating = false;
-                }, 300 );
-            }
-            else {
-                classie.add( bodyEl, 'show-menu' );
-                // animate path
-                path.animate( { 'path' : pathOpen }, 400, mina.easeinout, function() { isAnimating = false; } );
-            }
-            isOpen = !isOpen;
+        if( isAnimating ) return false;
+        isAnimating = true;
+        if( isOpen ) {
+            $('body').removeClass( 'show-menu' );
+            setTimeout( function() {
+                // reset path
+                path.attr( 'd', initialPath );
+                isAnimating = false;
+            }, 300 );
         }
+        else {
+            $('body').addClass( 'show-menu' );
+            // animate path
+            path.animate( { 'path' : pathOpen }, 400, mina.easeinout, function() { isAnimating = false; } );
+        }
+        isOpen = !isOpen;
+    }
 
     var toggleMenu2 =  function() {
         if( isAnimating ) return false;
         isAnimating = true;
         if( isOpen ) {
-            classie.remove( bodyEl, 'show-menu-secondary' );
+            $('body').removeClass( 'show-menu-secondary' );
             // animate path
             setTimeout( function() {
                 // reset path
@@ -98,7 +97,7 @@ var App = (function(){
             }, 300 );
         }
         else {
-            classie.add( bodyEl, 'show-menu-secondary' );
+            $('body').addClass( 'show-menu-secondary' );
             // animate path
             path.animate( { 'path' : pathOpen }, 400, mina.easeinout, function() { isAnimating = false; } );
         }
@@ -281,10 +280,9 @@ var App = (function(){
 
         $('.inappbrowser').click(function(e){
             e.preventDefault();
-            var ref = window.open($(this).attr('href'), '_blank', 'location=no');
-            ref.addEventListener('loadstop', function(){
-
-            });
+            var ref = window.open($(this).attr('href'), '_blank', 'location=no','toolbar=yes');
+            //ref.addEventListener('loadstop', function(){
+            //});
             //ref.addEventListener('loadstart', function() { alert(event.url); });
         });
     }
@@ -536,7 +534,7 @@ var App = (function(){
                     currentLat= latitude;
                     currentLong= longitude;
 
-                    //Getting useri saved previously in the device 
+                    //Getting userid previously saved in the device 
                     getUserId( function(userid){
                         currentUserId= userid;
                         advertisesInit();
@@ -552,5 +550,4 @@ var App = (function(){
             });
         }
     }
-
 })();

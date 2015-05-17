@@ -250,6 +250,7 @@ body {
     color: #fffce1;
     font-weight: 400;
     font-size: 1em;
+     overflow: hidden;
 }
 
 a {
@@ -1974,7 +1975,6 @@ PAGES
     border: none;
     font-family: 'icomoon';
     color: #fff;
-
     right: 40px;
     top: 40px;
 }
