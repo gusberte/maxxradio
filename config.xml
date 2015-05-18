@@ -1,11 +1,16 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.maxxdjradiomexico" version="0.0.1" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<widget xmlns= "http://www.w3.org/ns/widgets"
+        xmlns:gap= "http://phonegap.com/ns/1.0"
+        id= "com.fondaargentina.mobile"
+        versionCode= "10" 
+        version= "1.0.10" >
   
-  <name>MAxxDjRadio</name>
+    <name>MaxxDjRadio</name>
     <description>
-        Aplicación para dispositivos moviles MAxxDjRadio.
+        Aplicación para dispositivos moviles MaxxDjRadio.
     </description>
     <author email="rodrigo@reactivoestudio.com" href="http://www.reactivoestudio.com">
+        Reactivo Estudio
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -28,12 +33,9 @@
 
 
     <!-- PLATFORM IOS -->
-
-
         <feature name="Geolocation">
             <param name="ios-package" value="CDVLocation" />
         </feature>
-
 
         <feature name="InAppBrowser">
             <param name="ios-package" value="CDVInAppBrowser" />
