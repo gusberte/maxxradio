@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.maxxdjradiomexico" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
+    <name>MaxxDjRadio</name>
+    <description>
+        MaxxDjRadio México
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+
+    <plugin name="Storage" value="org.apache.cordova.Storage" />
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+
+    <!-- iOS 8.0+ -->
+    <!-- iPhone 6 Plus  -->
+    <icon src="res/icon/ios/icon.png" gap:platform="ios" width="180" height="180" />
+    <icon src="res/icon/ios/icon-60@3x.png" gap:platform="ios" width="180" height="180" />
+    <!-- iOS 7.0+ -->
+    <!-- iPhone / iPod Touch  -->
+    <icon src="res/icon/ios/icon-60.png" gap:platform="ios" width="60" height="60" />
+    <icon src="res/icon/ios/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+    <!-- iPad -->
+    <icon src="res/icon/ios/icon-76.png" gap:platform="ios" width="76" height="76" />
+    <icon src="res/icon/ios/icon-76@2x.png" gap:platform="ios" width="152" height="152" />
+    <!-- iOS 6.1 -->
+    <!-- Spotlight Icon -->
+    <icon src="res/icon/ios/icon-40.png" gap:platform="ios" width="40" height="40" />
+    <icon src="res/icon/ios/icon-40@2x.png" gap:platform="ios" width="80" height="80" />
+    <!-- iPhone / iPod Touch -->
+    <icon src="res/icon/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
+    <icon src="res/icon/ios/icon-57@2x.png" gap:platform="ios" width="114" height="114" />
+    <!-- iPad -->
+    <icon src="res/icon/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+    <!-- iPhone Spotlight and Settings Icon -->
+    <icon src="res/icon/ios/icon-29.png" gap:platform="ios" width="29" height="29" />
+    <icon src="res/icon/ios/icon-29@2x.png" gap:platform="ios" width="58" height="58" />
+    <!-- iPad Spotlight and Settings Icon -->
+    <icon src="res/icon/ios/icon-50.png" gap:platform="ios" width="50" height="50" />
+    <icon src="res/icon/ios/icon-50@2x.png" gap:platform="ios" width="100" height="100" />
+
+    <gap:splash src="res/screen/ios/screen-iphone-portrait-568h-2x.png" gap:platform="ios" width="640" height="1136" />
+
+    <feature name="NetworkStatus">
+        <param name="ios-package" value="CDVConnection" />
+    </feature>
+
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+    </feature>
+
+
+
+    
+</widget>
