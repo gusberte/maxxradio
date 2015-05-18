@@ -6,7 +6,6 @@
         Aplicación para dispositivos moviles MAxxDjRadio.
     </description>
     <author email="rodrigo@reactivoestudio.com" href="http://www.reactivoestudio.com">
-
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -74,8 +73,5 @@
         <feature name="InAppBrowser">
             <param name="ios-package" value="CDVInAppBrowser" />
         </feature>
-
-
-
     
 </widget>
