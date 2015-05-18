@@ -355,20 +355,14 @@ var App = (function(){
     }
 
     var playUrl = function( url, station, image ){
+        my_jPlayer.jPlayer("setMedia", {mp3: url});
+        my_jPlayer.jPlayer("play");
+
         $('.swiper-slide.swiper-slide-prev span').removeClass('fa-spin fa');
         $('.swiper-slide.swiper-slide-active span').addClass('fa-spin fa');
         $('.swiper-slide.swiper-slide-next span').removeClass('fa-spin fa');
-
         $('.track-station').html(station);
-
         $('.swiper-slide-active span').css('background','url('+image+') no-repeat').css('background-position','center center').css('background-size','100% 100%');
-
-        my_jPlayer.jPlayer("setMedia", {
-            mp3: url
-        });
-        my_jPlayer.jPlayer("play");
-
-        $(this).blur();
     }
 
     var loadEvents = function(onComplete){
@@ -441,26 +435,27 @@ var App = (function(){
         $.jPlayer.timeFormat.sepSec = "";
 
         // Initialize the play state text
-        my_playState.text(opt_text_selected);
+        //my_playState.text(opt_text_selected);
 
         // Instance jPlayer
         my_jPlayer.jPlayer({
             ready: function () {
-                $(".track-default").click();
+                
             },
             timeupdate: function(event) {
-                my_extraPlayInfo.text(parseInt(event.jPlayer.status.currentPercentAbsolute, 10) + "%");
+                //my_extraPlayInfo.text(parseInt(event.jPlayer.status.currentPercentAbsolute, 10) + "%");
                 //$('.progressbar .progress').css('width',parseInt(event.jPlayer.status.currentPercentAbsolute, 10) + "%")
             },
             play: function(event) {
-                my_playState.text(opt_text_playing);
+                //my_playState.text(opt_text_playing);
             },
             pause: function(event) {
-                my_playState.text(opt_text_selected);
+                //my_playState.text(opt_text_selected);
             },
             ended: function(event) {
-                my_playState.text(opt_text_selected);
+               //my_playState.text(opt_text_selected);
             },
+
             swfPath: "../../dist/jplayer",
             cssSelectorAncestor: "#jp_container",
             supplied: "mp3",

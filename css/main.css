@@ -343,25 +343,25 @@ body,
 }
 
 .itunes{
-    position: absolute;
-  width: 40px;
-  height: 35px;
+  position: absolute;
+  width: 50px;
+  height: 42px;
   background: url('../img/itunes.png') no-repeat;
   background-size: 100% 100%;
   left: 50%;
-  margin-left: 10px;
-  bottom: -8px;
+  margin-left: 16px;
+  bottom: -2px;
 }
 
 .beatport{
   position: absolute;
-  width: 40px;
-  height: 39px;
+  width: 50px;
+  height: 50px;
   background: url('../img/beatport.png') no-repeat;
   background-size: 100% 100%;
   left: 50%;
-  margin-left: -50px;
-  bottom: -8px;
+  margin-left: -60px;
+  bottom: -4px;
 }
 
 
