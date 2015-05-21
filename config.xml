@@ -10,7 +10,7 @@
     <content src="index.html" />
     <access origin="*" />
 
-    <icon src="res/icon.png" />
+    
 
     <preference name="SplashScreen" value="screen"/>
     <preference name="Orientation" value="portrait" />
@@ -18,6 +18,7 @@
     <plugin name="Storage" value="org.apache.cordova.Storage" />
 
     <platform name="android">
+        <icon src="res/icon.png" />
       <feature name="InAppBrowser">
           <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
       </feature>
