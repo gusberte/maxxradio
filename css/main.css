@@ -1,179 +1,3 @@
-/*
- * HTML5 Boilerplate
- *
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-/* ==========================================================================
-IMPORTS
-	========================================================================= */
-
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-@font-face {
-    font-family: 'icomoon';
-    src:url('icomoon/icomoon.eot?-fqbooj');
-    src:url('icomoon/icomoon.eot?#iefix-fqbooj') format('embedded-opentype'),
-    url('icomoon/icomoon.woff?-fqbooj') format('woff'),
-    url('icomoon/icomoon.ttf?-fqbooj') format('truetype'),
-    url('icomoon/icomoon.svg?-fqbooj#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-[class^="icon-"], [class*=" icon-"] {
-    font-family: 'icomoon';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-_icon:before {
-    content: "\e600";
-}
-
-.icon-canales_2:before {
-    content: "\e601";
-}
-
-.icon-canales:before {
-    content: "\e602";
-}
-
-.icon-cerrar:before {
-    content: "\e603";
-}
-
-.icon-contact:before {
-    content: "\e604";
-}
-
-.icon-dislike:before {
-    content: "\e605";
-}
-
-.icon-download:before {
-    content: "\e606";
-}
-
-.icon-Eventos:before {
-    content: "\e607";
-}
-
-.icon-facebook_icon:before {
-    content: "\e608";
-}
-
-.icon-favorites_O:before {
-    content: "\e609";
-}
-
-.icon-gallery:before {
-    content: "\e60a";
-}
-
-.icon-gift:before {
-    content: "\e60b";
-}
-
-.icon-information_O:before {
-    content: "\e60c";
-}
-
-.icon-instan:before {
-    content: "\e60d";
-}
-
-.icon-itunes:before {
-    content: "\e60e";
-}
-
-.icon-last10songs:before {
-    content: "\e60f";
-}
-
-.icon-like:before {
-    content: "\e610";
-}
-
-.icon-menu:before {
-    content: "\e611";
-}
-
-.icon-mixcloud:before {
-    content: "\e612";
-}
-
-.icon-next:before {
-    content: "\e613";
-}
-
-.icon-partners:before {
-    content: "\e614";
-}
-
-.icon-pausa:before {
-    content: "\e615";
-}
-
-.icon-play:before {
-    content: "\e616";
-}
-
-.icon-podcast_O:before {
-    content: "\e617";
-}
-
-.icon-RadioShows:before {
-    content: "\e618";
-}
-
-.icon-share_O:before {
-    content: "\e619";
-}
-
-.icon-SocialMedia:before {
-    content: "\e61a";
-}
-
-.icon-soundcloud:before {
-    content: "\e61b";
-}
-
-.icon-stepB:before {
-    content: "\e61c";
-}
-
-.icon-stepF:before {
-    content: "\e61d";
-}
-
-.icon-twitter:before {
-    content: "\e61e";
-}
-
-.icon-volumen:before {
-    content: "\e61f";
-}
-
-.icon-websites:before {
-    content: "\e620";
-}
-
-.icon-youtube:before {
-    content: "\e621";
-}
-
 
 html,
 button,
@@ -187,7 +11,14 @@ body {
     font-size: 1em;
     line-height: 1.4;
 
+    /*Evitar el highlight al tap de los elementos */
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 }
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 
 a {
     color: #00e;
@@ -204,6 +35,10 @@ a:hover {
 /*
  * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
  */
+
+.icomoon{
+ font-family: 'icomoon';
+}
 
 img {
     vertical-align: middle;
@@ -232,10 +67,6 @@ textarea {
    ========================================================================== */
 /* HEADER */
 
-::-webkit-scrollbar { 
-    display: none; 
-}
-
 header.header{
     float: left;
     width: 100%;
@@ -243,7 +74,7 @@ header.header{
 }
 .header .logo{
     text-align: center;}
-.header .logo img{ width:50%; height:auto;}
+.header .logo img{ width:50%; height:auto; margin-top: 0px;}
 /* MENÚ */
 
 *, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
@@ -342,28 +173,48 @@ body,
     z-index:150;
 }
 
+.controles .btns{
+    position: absolute;
+    bottom: 100px;
+    width:100%;
+    height: 50px;
+}
+
 .itunes{
   position: absolute;
+  display: block;
   width: 50px;
   height: 42px;
-  background: url('../img/itunes.png') no-repeat;
   background-size: 100% 100%;
   left: 50%;
-  margin-left: 16px;
+  margin-left: -82px;
   bottom: -2px;
+  font-size: 30px;
 }
 
 .beatport{
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background: url('../img/beatport.png') no-repeat;
+  display: block;
+  width: 40px;
+  height: 40px;
   background-size: 100% 100%;
   left: 50%;
-  margin-left: -60px;
-  bottom: -4px;
+  margin-left: -20px;
+  bottom: 6px;
+  font-size: 40px;
 }
 
+.heart {
+  position: absolute;
+  display: block;
+  width: 38px;
+  height: 38px;
+  background-size: 100% 100%;
+  left: 50%;
+margin-left: 45px;
+  bottom: 0px;
+  font-size: 30px;
+}
 
 .content::before {
     position: absolute;
@@ -383,19 +234,18 @@ body,
 
 /* Menu Button */
 #open-button{
-position: fixed;
-  z-index: 1000;
-  margin: 10px;
-  padding: 0;
-  top: 5px;
-  width: 35px;
-  height: 35px;
-  border: none;
-  text-indent: 2.5em;
-  font-size: 1.5em;
-  color: transparent;
-  background: transparent;
-  left: 10px;
+    position: fixed;
+    z-index: 1000;
+    margin: 10px;
+    padding: 0;
+    top: 5px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    font-size: 2.5em;
+    color: #fff;
+    background: transparent;
+    left: 10px;
 }
 #open-button .top-left{
     display:block; height:10px; width:10px; border:2px solid #fff; float:left; margin:2px;}
@@ -452,6 +302,7 @@ position: fixed;
     width: 25px;
     height: 25px;
     position: absolute;
+    display:block;
     right: 1em;
     top: 1em;
     overflow: hidden;
@@ -524,17 +375,21 @@ position: fixed;
 }
 
 .menu-wrap-secondary .back, .menu-wrap .back{
-      display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0px;
-  top: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 
 .icon-list {
-    width: 100%;
     border-top: 1px solid #8f8f8f;
+    position: absolute;
+    overflow-y: auto;
+    width: 100%;
+    top: 60px;
+    bottom: 160px;
 }
 .menu-wrap-secondary .icon-list {
     border-top: medium none;
@@ -581,16 +436,6 @@ position: fixed;
     color: #fff;
 }
 
-/* Morph Shape */
-.morph-shape {
-    position: absolute;
-    width: 80px;
-    height: 100%;
-    top: 0;
-    right: 0;
-    fill: #222222;
-    z-index: 1000;
-}
 .menu-wrap-secondary .morph-shape{
     left:0;
     right:none;
@@ -622,6 +467,7 @@ position: fixed;
     -webkit-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
 }
+
 .icon-list a {
     font-family: "Titillium Web",sans-serif;
     display: block;
@@ -712,6 +558,10 @@ position: fixed;
     border-bottom: 1px solid #8F8F8F;
 }
 
+.show-menu-secondary .icon-list{
+    margin-top: 110px;
+}
+
 .show-menu-secondary .icon-list,
 .show-menu-secondary .icon-list a {
     -webkit-transform: translate3d(0,0,0);
@@ -730,29 +580,32 @@ position: fixed;
     margin: 10px 0;
     text-align: center;
     width: 100%;
+
 }
 
 
 
 /*  DISCOS */
 .discos{
-    width: 100%;
-    display:block;
-    overflow:hidden;
-    height: 320px;
+    width: 400px;
+    display: block;
+    overflow: hidden;
+    height: 400px;
     z-index: 200;
-    position:absolute;
+    position: absolute;
     top: 50%;
-    margin-top: -180px;
+    margin-top: -200px;
+    margin-left: -200px;
+    left: 50%;
 }
 .swiper-container{
-    width: 270px;
-    height: 270px;
+    width: 250px;
+    height: 250px;
     position:absolute;
     left: 50%;
     top: 50%;
-    margin-left: -135px;
-    margin-top: -135px;
+    margin-left: -125px;
+    margin-top: -125px;
 
 }
 .swiper-slide{
@@ -763,8 +616,8 @@ position: fixed;
     background-position: center;
     background-size: cover;
     display: inline-block;;
-    width: 270px;
-    height: 270px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     border: 3px solid #fff;
 }
@@ -1209,12 +1062,10 @@ position: fixed;
 }
 .mix-previo{}
 /*  THUMBS */
-.thumbs{
-    float: left;
+.votes{
+    position:absolute;
+    top:55%;
     width: 100%;
-    height: 0px;
-    overflow: visible;
-    position: relative;
     z-index: 999;
 }
 .like.disliked, .dislike.liked{
@@ -1225,21 +1076,20 @@ position: fixed;
     opacity: 0;
 }
 .like{
-    position: fixed;
-    top: 70%;
+    position: absolute;
     right: 15px;
 }
 .dislike {
-    position: fixed;
-    top: 70%;
+    position: absolute;
     left: 15px;
 }
-.heart, .like, .dislike{
-    font-size: 20px;
+.heart i{
+    color: #fff;
 }
-.heart i, .like i, .dislike i{
-    display: none;
-    color: #e20025;
+ .like i, .dislike i{
+    color: #fff;
+    font-size: 35px;
+    margin: 10px;
 }
 .heart.clicked .fa-heart, .like.clicked .fa-thumbs-up, .dislike.clicked .fa-thumbs-down{
     display: block;
@@ -1327,7 +1177,7 @@ position: fixed;
   -o-transition: opacity linear 0.3s;
   transition: opacity linear 0.3s;
   top: 50%;
-  margin-top: 150px;
+  margin-top: 65px;
 }
 .info-album h2{
     float:left;
@@ -1381,7 +1231,7 @@ position: fixed;
     list-style:none;}
 .over-content ul.last li{
     float:left;
-    width:50%;
+    width:100%;
     text-align:center;
     border-bottom:1px solid #fff;
 }
@@ -1535,7 +1385,7 @@ position: fixed;
 }
 
 .over-content ul.last li:nth-child(odd){
-    border-right:1px solid #fff;
+   
 }
 .over-content ul.calendar li:nth-child(odd){
     border-right:medium none;
@@ -1663,7 +1513,7 @@ position: fixed;
     width:100%; 
     padding:0; 
     margin:0; 
-    bottom: 82px;
+    bottom: 0px;
 }
 
 .controles ul[role="primary"]{
@@ -1672,6 +1522,7 @@ position: fixed;
     padding:0;
     margin:0;
     z-index: 35;
+    bottom: 5px;
 }
 .controles ul[role="secondary"]{
     float: left;
@@ -1705,7 +1556,6 @@ position: fixed;
     color:#E20025;
     font-size:25px;
 }
-.controles a i{ font-size:18px;}
 .time{
  position: absolute;
   width: 100%;
@@ -1782,7 +1632,7 @@ position: fixed;
 
 .vol-selector{
     float:left;
-    margin-left: 5px;
+    margin-left: 7px;
     border: 2px solid #f00;
     display: block;
 }
@@ -1893,8 +1743,7 @@ position: absolute;
 
 .nextsong{
   position: absolute;
-  left: 50%;
-  margin-left: 142px;
+  right: 10px;
   top: 50%;
   margin-top: -35px;
   display: block;
@@ -1908,8 +1757,7 @@ position: absolute;
 
 .prevsong{
   position: absolute;
-  left: 50%;
-  margin-left: -173px;
+  left: 10px;
   top: 50%;
   margin-top: -35px;
   display: block;
@@ -1918,7 +1766,7 @@ position: absolute;
   width: 30px;
   overflow: hidden;
   background-size: 100% 100%;
-  opacity: 0.4;
+  opacity: 0.03;
 }
 
 
@@ -2038,6 +1886,31 @@ textarea[contenteditable] {
     display: inline-block;
 }
 
+.loading{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 2000;
+}
+
+.loading img{
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+.loading .back{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.7;
+}
+
 /**************************************
 PAGES 
 **************************************/
@@ -2093,7 +1966,7 @@ PAGES
 
 
 .advertise.page{
-    background-color:#000;
+    background-color:#f00;
     opacity: 1 !important;
 }
 
@@ -2106,15 +1979,12 @@ PAGES
     right: 0;
 }
 
-
 .login.page{
     padding:20px;
     background-color:#000;
     font-size: 2em;
-}
-
-.login{
     text-align: center;
+    display:none;
 }
 
 .login input{
@@ -2246,7 +2116,12 @@ a.ad3{
     /* Style adjustments for viewports that meet the condition */
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (min-resolution: 144dpi) {
+
+@media only screen and (min-width: 320px) {
     /* Style adjustments for viewports that meet the condition */
+
+    .discos{
+        margin-top: -265px;
+    }
+
 }

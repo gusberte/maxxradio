@@ -1,26 +1,17 @@
 var App = (function(){
     
+    var nroDisco=0;
     var adFlag=0;
     var closeAds=true;
     var discos;
     var advertises1 = new Array();
     var advertises2 = new Array();
     var advertises3 = new Array();
-
-    var bodyEl = document.body,
-        content = document.querySelector( '.content-wrap' ),
-        openbtn = document.getElementById( 'open-button' ),
-        openbtn2 = document.getElementById( 'open-button-secondary' ),
-        closebtn = document.getElementById( 'close-button' ),
-        closebtn2 = document.getElementById( 'close-button-secondary' ),
-        isOpen = false,
-
-        morphEl = document.getElementById( 'morph-shape' ),
-        s = Snap( morphEl.querySelector( 'svg' ) );
-        path = s.select( 'path' );
-        initialPath = this.path.attr('d'),
-        pathOpen = morphEl.getAttribute( 'data-morph-open' ),
+    var geolocate = false;
+    var isOpen = false,
         isAnimating = false;
+        stationsPlayer= Array();
+        stationPlaying=0;
 
     // Local copy of jQuery selectors, for performance.
     var my_jPlayer = $("#jquery_jplayer"),
@@ -38,47 +29,16 @@ var App = (function(){
     // A flag to capture the first track
     var first_track = true;
 
-    var mask = function(){
-        var mask03 = $('.sobre_03');
-        var total = $(window).width();
-        mask03.width( total - 119 )
-    };
-
-    var hideThumbs = function(){
-        $('.dislike').click( function(){
-            $('.like').addClass('disliked');
-        })
-        $('.like').click( function(){
-            $('.dislike').addClass('liked');
-        })
-    };
-
-    var heart = function(clase){
-        $(clase).on({
-            click: function(){
-                $(this).toggleClass('clicked');
-                $('.pulse', this).addClass('activo');
-                setTimeout( function(){ $('.pulse').removeClass('activo'); }, 1000 );
-            },
-        })
-    };
-
     var toggleMenu =  function() {
         if( isAnimating ) return false;
         isAnimating = true;
         if( isOpen ) {
             $('body').removeClass( 'show-menu' );
-            setTimeout( function() {
-                // reset path
-                path.attr( 'd', initialPath );
-                isAnimating = false;
-            }, 300 );
         }
         else {
             $('body').addClass( 'show-menu' );
-            // animate path
-            path.animate( { 'path' : pathOpen }, 400, mina.easeinout, function() { isAnimating = false; } );
         }
+        setTimeout(function(){isAnimating = false},200);
         isOpen = !isOpen;
     }
 
@@ -86,25 +46,13 @@ var App = (function(){
         if( isAnimating ) return false;
         isAnimating = true;
         if( isOpen ) {
-            $('body').removeClass( 'show-menu-secondary' );
-            // animate path
-            setTimeout( function() {
-                // reset path
-                path.attr( 'd', initialPath );
-                isAnimating = false;
-            }, 300 );
+            $('body').removeClass( 'show-menu-secondary' );         
         }
         else {
             $('body').addClass( 'show-menu-secondary' );
-            // animate path
-            path.animate( { 'path' : pathOpen }, 400, mina.easeinout, function() { isAnimating = false; } );
         }
+        setTimeout(function(){isAnimating = false},200);
         isOpen = !isOpen;
-    }
-
-    var closeLogin = function(){
-        $('.player').show();
-        $('.login').fadeOut();
     }
 
     var checkChannels = function(){
@@ -124,20 +72,30 @@ var App = (function(){
     }
 
     var getStations = function(){
+
+        tracks = '<div class="swiper-slide" data-image="'+Config.serviceJson+'/back/uploads/disc1.jpg" data-name="R3HAB" data-title="Imagine"><span style="background-image: url('+Config.serviceJson+'/back/uploads/disc1.jpg);border: solid 2px #FFFFFF;"></span></div>';
+        discos.appendSlide(tracks);
+        tracks = '<div class="swiper-slide" data-image="'+Config.serviceJson+'/back/uploads/disc2.jpg" data-name="Glaser" data-title="Titanium" ><span style="background-image: url('+Config.serviceJson+'/back/uploads/disc2.jpg);border: solid 2px #FFFFFF;"></span></div>';
+        discos.appendSlide(tracks);
+        tracks = '<div class="swiper-slide" data-image="'+Config.serviceJson+'/back/uploads/disc3.jpg" data-name="2Elements" data-title="Armin Vaan Buren" ><span style="background-image: url('+Config.serviceJson+'/back/uploads/disc3.jpg);border: solid 2px #FFFFFF;"></span></div>';
+        discos.appendSlide(tracks);
+
         $.post(Config.serviceJson+"/back/api/web/getstations", function(data){
             var stations="";
             var obj = eval(data);
 
             $.each(obj, function(key, value){
-                stations +='<a href="' + value.url + '" class="playstation" data-name="'+value.name+'" data-image="'+Config.serviceJson+'/back/uploads/'+value.diskimage+'"><span>' + value.name + '</span><img src="'+Config.serviceJson+'/back/uploads/stations/' + value.photo + '" /></a>';
-            
-                tracks = '<div class="swiper-slide" data-image="'+Config.serviceJson+'/back/uploads/'+value.diskimage+'" data-name="'+value.name+'" data-station="'+value.url+'"><span style="background-image: url('+Config.serviceJson+'/back/uploads/'+value.diskimage+');border: solid 2px #FFFFFF;"></span></div>';
-                discos.appendSlide(tracks);
-           
+                stations +='<a href="' + value.url + '" class="playstation" data-id="'+value.idstation+'" data-name="'+value.name+'" data-image="'+Config.serviceJson+'/back/uploads/'+value.diskimage+'"><span>' + value.name + '</span><img src="'+Config.serviceJson+'/back/uploads/stations/' + value.photo + '" /></a>';            
+                //tracks = '<div class="swiper-slide" data-image="'+Config.serviceJson+'/back/uploads/'+value.diskimage+'" data-name="'+value.name+'" data-station="'+value.url+'"><span style="background-image: url('+Config.serviceJson+'/back/uploads/'+value.diskimage+');border: solid 2px #FFFFFF;"></span></div>';
+                //discos.appendSlide(tracks);
+                stationsPlayer[stationsPlayer.length] = {'id':value.idstation,'url':value.url,'favs':0,'name':value.name};
             });
 
             $('.radios').append(stations);
-        });
+        }); 
+
+        $('.track-station').html($('.swiper-slide-active').data('name'));
+       
     }
 
     var getUserId = function( onComplete ){
@@ -153,61 +111,88 @@ var App = (function(){
         });
     }
 
+    var setNextPrevSong = function(){
+        if( nroDisco ==0){
+            $('.nextsong').css('opacity','0.4');
+            $('.prevsong').css('opacity','0.03');
+        }
+        if( nroDisco ==1){
+            $('.nextsong').css('opacity','0.4');
+            $('.prevsong').css('opacity','0.4');
+        }
+        if( nroDisco ==2){
+            $('.nextsong').css('opacity','0.03');
+            $('.prevsong').css('opacity','0.4');
+        }
+    }
+
     var initEvents = function(){
+
+        $('.like').click(function(e){
+            e.preventDefault();
+            if( ! $('.like').hasClass('.disabled') ){
+                $('.dislike').addClass('.disabled');
+                $('.like i').css("color","#f00");
+                $('.dislike i').css("opacity","0.04");
+            }
+        });
+
+        $('.dislike').click(function(e){
+            e.preventDefault();
+             if( ! $('.dislike').hasClass('.disabled') ){
+                $('.like').addClass('.disabled');
+                $('.dislike i').css("color","#f00");
+                $('.like i').css("opacity","0.04");
+            }
+        });
 
         $('.nextsong').click(function(e){
             e.preventDefault();
             discos.slideNext(true,500);
+            nroDisco++;
+            if( nroDisco >2) nroDisco = 2;
+            setNextPrevSong();
+            var name = $('.swiper-slide-active').data('name');
+            var image = $('.swiper-slide-active').data('image');
+            $('.track-station').html(name);
+            $('.swiper-slide-active span').css('background','url('+image+') no-repeat').css('background-position','center center').css('background-size','100% 100%');
         });
 
         $('.prevsong').click(function(e){
             e.preventDefault();
             discos.slidePrev(true,500);
+            nroDisco--;
+            if( nroDisco <0) nroDisco = 0;
+            setNextPrevSong();
+            var name = $('.swiper-slide-active').data('name');
+            var image = $('.swiper-slide-active').data('image');            
+            $('.track-station').html($('.swiper-slide-active').data('name'));
+            $('.swiper-slide-active span').css('background','url('+image+') no-repeat').css('background-position','center center').css('background-size','100% 100%');
         });
 
-        openbtn.addEventListener( 'click', toggleMenu );
-        if( closebtn ) {
-            closebtn.addEventListener( 'click', toggleMenu );
-        }
+        $('#open-button').on( Config.clickEvent, toggleMenu );
+        $('#close-button').on( Config.clickEvent, toggleMenu );
+        
+        $('#open-button-secondary').on( Config.clickEvent, toggleMenu2 );
+        $('#close-button-secondary').on( Config.clickEvent, toggleMenu2);
 
-        // close the menu element if the target it´s not the menu element or one of its descendants..
-        content.addEventListener( 'click', function(ev) {
-            var target = ev.target;
-            if( isOpen && target !== openbtn ) {
-                toggleMenu();
-            }
-        } );
-
-        openbtn2.addEventListener( 'click', toggleMenu2 );
-        if( closebtn2 ) {
-            closebtn2.addEventListener( 'click', toggleMenu2 );
-        }
-
-        // close the menu element if the target it´s not the menu element or one of its descendants..
-        content.addEventListener( 'click', function(ev) {
-            var target = ev.target;
-            if( isOpen && target !== openbtn ) {
-                toggleMenu2();
-            }
-        } );
-
-        $(".menu-wrap .back").click(function(){
+        $(".menu-wrap .back").on(Config.clickEvent,function(){
             toggleMenu();
         }); 
 
-        $(".menu-wrap-secondary .back").click(function(){
+        $(".menu-wrap-secondary .back").on(Config.clickEvent,function(){
             toggleMenu2();
         });
 
-        $(".advertise .close-button").click(function(){
+        $(".advertise .close-button").on(Config.clickEvent,function(){
             closeAdvertise1();
         });  
 
-        $(".login .close-button").click(function(){
+        $(".login .close-button").on(Config.clickEvent,function(){
             $(".login").fadeOut();
         }); 
         
-        $("#contact .close-button").click(function(){
+        $("#contact .close-button").on(Config.clickEvent,function(){
             $('#contact .message').html("");
             $('#contact .contact').show();
             $('.contact-subject').css("background-color",'none');
@@ -219,7 +204,6 @@ var App = (function(){
         }); 
 
         $(".login .face").click(function(e){
-
             e.preventDefault();
             openFB.login(
                 function(response) {
@@ -248,15 +232,17 @@ var App = (function(){
             );
         });
 
-        $(".login .submit").click(function(){
+        $(".login .submit").on(Config.clickEvent,function(){
             var email = $('.login #mail').val();
             var nombre = $('.login #nombre').val();
             var telefono = $('.login #telefono').val();
             var apellido = $('.login #apellido').val();
             
+            showLoader();
             $.post(Config.serviceJson+"/back/api/web/registroapp",
                 {'mail':email,'name':nombre,'lastname':apellido,'telephone':telefono,'lat':currentLat,'long':currentLong},
                 function(data){
+                    hideLoader();
                     if( data == 'false'){
                         $('#mail').css("background-color","#f00");
                     }else{
@@ -268,24 +254,17 @@ var App = (function(){
             );
         });
 
-        $('.vol-selector').click(function(e){
+        $('.vol-selector').on(Config.clickEvent,function(e){
             e.preventDefault();
             var pos =$(this).data('vol');
-            for( i=1; i <= 5; i++){
-                if( i <= pos) {
-                    $('.vol-selector.vol'+i).css("background-color","#f00");
-                }else{
-                    $('.vol-selector.vol'+i).css("background-color","none");
-                }
-            }
-            var vol = parseInt($(this).data('vol')) / 5;
-            my_jPlayer.jPlayer("volume", vol);
+            setVolume(pos);
         });
 
         // Create click handlers for the different tracks
-        $(".jp-play").click(function(e) {
+        $(".jp-play").on(Config.clickEvent,function(e) {
             e.preventDefault();
-            playUrl($('.swiper-slide.swiper-slide-active').data('station'),$('.swiper-slide.swiper-slide-active').data('name'),$('.swiper-slide.swiper-slide-active').data('image'));
+            //playUrl(stationsPlayer[0],$('.swiper-slide.swiper-slide-active').data('name'),$('.swiper-slide.swiper-slide-active').data('image'));
+            playStation(stationsPlayer[stationPlaying].url);
         });
 
         $('.jp-play, .jp-pause, .cover .track, .playstation').on({
@@ -300,60 +279,91 @@ var App = (function(){
             },
         })
 
-        discos.on('slideChangeEnd', function () {
-           playUrl($('.swiper-slide.swiper-slide-active').data('station'),$('.swiper-slide.swiper-slide-active').data('name'),$('.swiper-slide.swiper-slide-active').data('image'));
-        });
+        //discos.on('slideChangeEnd', function () {
+        //   playUrl($('.swiper-slide.swiper-slide-active').data('station'),$('.swiper-slide.swiper-slide-active').data('name'),$('.swiper-slide.swiper-slide-active').data('image'));
+        //});
 
-        $('body').on('click',".playstation", function(e) {
+        $('body').on(Config.clickEvent,".playstation", function(e) {
             e.preventDefault();
-                
             //Buscando el slide que debo mostrar 
-            var i=0;
+            /*var i=0;
             var name= $(this).data('name');
             $('.swiper-slide').each(function( index ) {
                 if( $(this).data('name') == name ){ i=index;}
             });
             discos.slideTo(i, 500, false);
+            */
+            //playUrl($(this).attr("href"),$(this).data('name'),$(this).data('image'));
 
-            playUrl($(this).attr("href"),$(this).data('name'),$(this).data('image'));
+            //Buscando la estación
+            var station=null;
+            for(i=0; i< stationsPlayer.length; i++){
+                if( stationsPlayer[i].id == $(this).data('id') ){
+                    stationPlaying = i;
+                    break;
+                }
+            }
+            playStation(stationsPlayer[stationPlaying].url);
 
-        });
-
-        $('a.mix-over').click(function(e){
-            e.preventDefault();
-            
-            toggleMenu();
-
-            if($(this).attr('href') == "#events") {
-                loadEvents(function(){
-                    $('.page').not('.player,#events').attr("class","page transition right");
-                    $('#events').attr("class","page transition center");
-                });
-            }else if($(this).attr('href') == "#partners") {
-                loadPartners(function(){
-                    $('.page').not('.player,#partners').attr("class","page transition right");
-                    $('#partners').attr("class","page transition center");
-                });
+            //Configurando el favs
+            if( stationsPlayer[stationPlaying].fav == 1 ){
+                $('.heart i').removeClass("icon-favorites_O").addClass("icon-favorites");
             }else{
-                $('.page').not('.player,'+$(this).attr('href')).attr("class","page transition right");
-                $($(this).attr('href')).attr("class","page transition center");
+                $('.heart i').removeClass("icon-favorites").addClass("icon-favorites_O");
             }
         });
 
-        $(".page .close-button").click(function(){
+        $('.heart').on(Config.clickEvent,function(e){
+            $('.heart i').removeClass("icon-favorites_O").addClass("icon-favorites");
+            stationsPlayer[stationPlaying].fav=1;
+        });
+
+        $('a.mix-over').on(Config.clickEvent,function(e){
+            e.preventDefault();
+            toggleMenu();
+            if($(this).attr('href') == "#events") {
+                loadEvents(function(){
+                    openPage('#events');
+                });
+            }else if($(this).attr('href') == "#partners") {
+                loadPartners(function(){
+                    openPage('#partners');
+                });
+             }else if($(this).attr('href') == "#favs") {
+                var html="<ul class='last'>";
+                for(i=0; i< stationsPlayer.length; i++){
+                    if( stationsPlayer[i].fav == 1){
+                        html+='<li><a href="'+ stationsPlayer[i].url +'" class="playstation" data-id="'+ stationsPlayer[i].id +'" data-name="'+ stationsPlayer[i].name +'"><h3>'+ stationsPlayer[i].name +'</h3></a></li>';
+                    }
+                }
+                html+="</ul>";
+                $('#favs .over-content').html(html);
+                openPage($(this).attr('href'));
+            }else{
+                openPage($(this).attr('href'));
+            }
+        });
+
+        $(".page .close-button").on(Config.clickEvent,function(){
             $(this).parent().attr("class","page transition right");
         });  
 
-        $(".contact-submit").click(function(){
+        $(".contact-submit").on(Config.clickEvent,function(){
             sendContactForm();
         })
 
-        $('.inappbrowser').click(function(e){
+        $('.inappbrowser').on(Config.clickEvent,function(e){
             e.preventDefault();
             var ref = window.open($(this).attr('href'), '_blank', 'location=yes');
         });
     }
 
+    var openPage = function(id){
+        $('.page').not('.player,'+id).attr("class","page transition right");
+        $(id).attr("class","page transition center");
+    }
+
+    /*DEPRECADO PARA ËSTA VERSION
     var playUrl = function( url, station, image ){
         my_jPlayer.jPlayer("setMedia", {mp3: url});
         my_jPlayer.jPlayer("play");
@@ -363,6 +373,23 @@ var App = (function(){
         $('.swiper-slide.swiper-slide-next span').removeClass('fa-spin fa');
         $('.track-station').html(station);
         $('.swiper-slide-active span').css('background','url('+image+') no-repeat').css('background-position','center center').css('background-size','100% 100%');
+    }*/
+
+    var playStation = function( url ){
+        my_jPlayer.jPlayer("setMedia", {mp3: url});
+        my_jPlayer.jPlayer("play");
+    }
+
+    var setVolume = function( pos ){
+        for( i=1; i <= 5; i++){
+            if( i <= pos) {
+                $('.vol-selector.vol'+i).css("background-color","#f00");
+            }else{
+                $('.vol-selector.vol'+i).css("background-color","none");
+            }
+        }
+        var vol = parseInt(pos) / 5;
+        my_jPlayer.jPlayer("volume", vol);
     }
 
     var loadEvents = function(onComplete){
@@ -426,7 +453,8 @@ var App = (function(){
         );
     }
 
-    var jPlayerInit= function(){
+    var jPlayerInit= function(){   
+        setVolume(5);
 
         // Change the time format
         $.jPlayer.timeFormat.padMin = false;
@@ -460,9 +488,7 @@ var App = (function(){
             cssSelectorAncestor: "#jp_container",
             supplied: "mp3",
             wmode: "window"
-        });
-
-       
+        }); 
     }
 
     var disksSwiperInit = function(){
@@ -478,8 +504,6 @@ var App = (function(){
             },
         });
         discos.slideTo(1);
-
-
     }
 
     var loadAdsInterval;
@@ -550,7 +574,12 @@ var App = (function(){
     }
 
     var advertisesInit = function( ){
-       loadAdvertises(function(){ advertiseManager() });
+        if( geolocate ){ //Las publicidades solo se muestran si hay geolocalización
+            showLoader();
+            loadAdvertises(function(){ advertiseManager(); hideLoader(); });
+        }else{
+            openPlayer();
+        }
     }
     
     var loadAdvertises = function(onComplete){
@@ -580,46 +609,75 @@ var App = (function(){
         clearInterval(adFlag);
         if(closeAds){
             closeAds=false;
-            getUserId( function(userid){
-                if( userid != null ){
-                    $('.login').hide();
-                    $('.player').show();
-                }else{
-                    $('.login').show();
-                    $('.player').hide();
-                }
-                $('.advertise').fadeOut();
-            });
+            openPlayer();
         }
+    }
+
+    var openPlayer = function(){
+        $('.advertise').fadeOut();
+        $('.login').fadeOut();
+        $('.player').show();
+    }
+
+    var openLogin = function(){
+        $('.login').show();
+        $('.player').hide();
+        $('.advertise').hide();
+    }
+
+    var closeLogin = function(){
+        if( geolocate ){
+            advertisesInit();
+        }else{
+            hideLoader();
+            $('.player').show();
+            $('.login').fadeOut();
+        }
+    }
+
+    var sizeAdjustInit = function( ){
+        var displayWidth= $( window ).width();
+        var heightAux = $('.discos').height();
+        var percent = (displayWidth/ heightAux) * 0.9;
+        $('.discos').css('transform','scale('+percent+')');
+    }
+
+    var showLoader = function(){
+        $('.loading').show();
+    }
+
+    var hideLoader = function(){
+        $('.loading').hide();
     }
 
     return {
         init: function(){
-
             disksSwiperInit();
-            mask();
-            heart('.heart, .like, .dislike');
-            hideThumbs();
-
+            jPlayerInit();
+            getStations();
+            initEvents();
+            sizeAdjustInit();
+       
+            showLoader();
             Config.load( function(){
-                
                 openFB.init({'appId': Config.fbAppId});
-
                 Utils.getLocation ( function( latitude, longitude ){
                     currentLat= latitude;
                     currentLong= longitude;
+                    geolocate = ( currentLat != -1 || currentLong != -1);
+
                     getUserId( function(userid){
                         currentUserId= userid;
-                        advertisesInit();
-                        //checkChannels();
-                        getStations();
-                        initEvents();
-                        jPlayerInit();
-                    });
 
+                        if( currentUserId== null ){
+                            hideLoader();    
+                            openLogin();
+                        }else{
+                            advertisesInit();
+                        }
+                    }); 
                 });
             });
-        
         }
     }
 })();

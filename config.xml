@@ -1,22 +1,50 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<widget xmlns= "http://www.w3.org/ns/widgets"
-        xmlns:gap= "http://phonegap.com/ns/1.0"
-        id= "com.maxxdjradiomexico.app"
-        versionCode= "10" 
-        version= "1.0.10">
-    
-    <name>MaxxDjRadioMx</name>
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.maxxdjradiomexico.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>MaxxDjRadioMexico</name>
     <description>
-        MaxxDjRadio Mexico
+        A sample Apache Cordova application that responds to the deviceready event.
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
     <content src="index.html" />
     <access origin="*" />
+
+    <icon src="res/icon.png" />
+
+    <preference name="SplashScreen" value="screen"/>
+    <preference name="Orientation" value="portrait" />
+
     <plugin name="Storage" value="org.apache.cordova.Storage" />
-    <feature name="InAppBrowser">
-        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
-    </feature>
-    
+
+    <platform name="android">
+      <feature name="InAppBrowser">
+          <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+      </feature>
+
+        <splash src="res/screen/android/screen-hdpi-portrait.png" density="port-hdpi"/>
+        <splash src="res/screen/android/screen-ldpi-portrait.png" density="port-ldpi"/>
+        <splash src="res/screen/android/screen-pmdpi-portrait.png" density="port-mdpi"/>
+        <splash src="res/screen/android/screen-xhdpi-portrait.png" density="port-xhdpi"/>
+    </platform>
+
+    <platform name="ios">
+
+      <feature name="InAppBrowser">
+          <param name="ios-package" value="CDVInAppBrowser" />
+      </feature>
+
+
+        <!-- images are determined by width and height. The following are supported -->
+        <splash src="res/screen/ios/screen-iphone-portrait.png" width="320" height="480"/>
+        <splash src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" height="960"/>
+        <splash src="res/screen/ios/screen-ipad-portrait.png" width="768" height="1024"/>
+        <splash src="res/screen/ios/screen-ipad-portrait-2x.png" width="1536" height="2048"/>
+        <splash src="res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" height="1136"/>
+    </platform>
+
+
+
+	   <preference name="SplashScreenDelay" value="3000" />
+
 </widget>

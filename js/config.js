@@ -12,6 +12,7 @@ var Config=  (function(){
 	    changeAds1Interval = 20000;
 	    changeAds2Interval = 20000;
 	    changeAds3Interval = 10000;
+	    clickEvent = 'click';
 
 	return {
 		'serviceJson': serviceJson,
@@ -24,13 +25,13 @@ var Config=  (function(){
 	    'changeAds1Interval': changeAds1Interval,
 	    'changeAds2Interval': changeAds2Interval,
 	    'changeAds3Interval': changeAds3Interval,
+	    'clickEvent': clickEvent,
 
 		load: function( onComplete ){
-			$.post(Config.serviceJson+"/back/api/web/getconfig", 
-	            function(data){
+			var posting = $.post(Config.serviceJson+"/back/api/web/getconfig");
+			posting.done(function(data){
 	                var obj = eval(data);
 	                console.log(obj[0].fbAppId);
-
 	                Config.fbAppId = obj[0].fbAppId;
 	                Config.googleId = obj[0].googleId;
 					Config.loadAdsInterval = obj[0].fbAppId;
@@ -39,8 +40,10 @@ var Config=  (function(){
 					if( obj[0].changeAds2Interval != undefined) Config.changeAds2Interval= obj[0].changeAds2Interval;
 					if( obj[0].changeAds3Interval != undefined) Config.changeAds3Interval = obj[0].changeAds3Interval;
 		    		onComplete();
-	            }
-	        );
+	        });
+	        posting.fail(function(data){
+	        	onComplete();
+	        });
 		}
 	}
 })();

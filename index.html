@@ -24,9 +24,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="">
 
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -36,30 +36,23 @@
 <!--<div class="debug" style="width:100%; height: 100px; background-color: #fff; color:#000"></div>-->
 
 <div class="container">
-    <div class="morph-shape" style="display:none" id="morph-shape" data-morph-open="M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
-            <path d="M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z"/>
-        </svg>
-    </div>
     <div class="menu-wrap">
         <nav class="menu">
             <button class="close-button" id="close-button">Close Menu</button>
             <div class="icon-list">
-                <!--
                 <a href="#last10" class="mix-over" ><i class="fa fa-fw fa-star-o"></i><span>Last 10 songs</span></a>
-                <a href="#favorites" class="mix-over"><i class="fa fa-fw fa-star-o"></i><span>My Favorites</span>
-                -->
+                <a href="#favs" class="mix-over"><i class="fa fa-fw fa-star-o"></i><span>My Favorites</span>
                 <a href="#social-networks" class="mix-over"><i class="fa fa-fw fa-plug"></i><span>Social Networks</span></a>
                 <a href="#events" class="mix-over"><i class="fa fa-fw fa-calendar-o"></i><span>Events</span></a>
                 <a href="#gallery" class="mix-over"><i class="fa fa-fw fa-file-image-o"></i><span>Gallery</span></a>
                 </a>
                 <a href="#shows" class="mix-over"><i class="fa fa-fw fa-play-circle"></i><span>Radio Shows</span></a>
-                <a href="http://www.maxxdjradioamerica.com" class="remark inappbrowser"><i class="fa fa-fw fa-gift"></i><span>E-Shop</span></a>
+                <a href="#podcast" class="mix-over"><i class="fa fa-fw fa-play-circle"></i><span>Podcast</span></a>
                 <a href="#partners" class="mix-over"><i class="fa fa-fw fa-heart-o"></i><span>Partners</span></a>
+                <a href="#webs" class="mix-over"><i class="fa fa-fw fa-comment-o"></i><span>Websites</span></a>
+                <a href="http://www.maxxdjradioamerica.com" class="remark inappbrowser"><i class="fa fa-fw fa-gift"></i><span>E-Shop</span></a>
                 <a href="#contact" class="mix-over"><i class="fa fa-fw fa-comment-o"></i><span>Contact</span></a>
                 <a href="#info" class="mix-over"><i class="fa fa-fw fa-info"></i><span>Information</span></a>
-                
-                
             </div>
             <a href="#" class="ad3 advertising" rel="external"><img src="" border="0" width="100%"/></a>
         </nav>
@@ -71,7 +64,7 @@
             <button class="close-button-secondary" id="close-button-secondary">Close Menu</button>
             <header>
                 <a class="close" href="#">
-                    <i class="icomoon icon-websites"> </i>
+                    <i class="icomoon icon-channels"> </i>
                 </a>
             </header>
             <div class="icon-list radios">
@@ -79,18 +72,20 @@
             </div>
         </nav>
         <div class="back"></div>
-    </div>  
+    </div>
+    
     <div class="content-wrap">
-        <div class="content"> 
+        <div class="loading">
+            <div class="back"></div>
+            <img src="img/loading.gif" width="100px" height="100px"/>
+        </div>
+        <div class="content">
             <div class="player page center">
                 <button class="menu-button" id="open-button">
-                    <span class="top-left"></span>
-                    <span class="top-right"></span>
-                    <span class="bottom-left"></span>
-                    <span class="bottom-right"></span>
+                    <i class="icomoon icon-menu"> </i>
                 </button>
                 <button class="menu-button-secondary" id="open-button-secondary">
-                    <i class="icomoon icon-websites"></i>
+                    <i class="icomoon icon-channels"> </i>
                 </button>
 
                 <header class="header">
@@ -108,6 +103,15 @@
                         </div>
                     </div>
                     <a href="#" class="nextsong"></a>
+                </div>
+
+                <div class="votes">
+                    <a class="dislike" href="#">
+                        <i class="icomoon icon-dislike"> </i>
+                    </a>
+                    <a class="like" href="#">
+                        <i class="icomoon icon-like"> </i>
+                    </a>
                 </div>
 
                 <!--
@@ -173,8 +177,11 @@
                                     </a>
                                 </li>
                             </ul>
-                            <a class="itunes inappbrowser" href="https://www.apple.com/mx/itunes/music/"></a>
-                            <a class="beatport inappbrowser" href="https://www.beatport.com/"></a>
+                            <div class="btns">
+                                <a class="itunes inappbrowser" href="https://www.apple.com/mx/itunes/music/"> <i class="icomoon icon-itunes"> </i></a>
+                                <a class="beatport inappbrowser" href="https://www.beatport.com/"><i class="icomoon icon-beatport"> </i></a>
+                                <a class="heart" href="#favbtn"><i class="icomoon icon-favorites_O"> </i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,7 +192,6 @@
                     <div class="over-content">
                     <p>LOGIN</p>
                     <a href="#" class="face"></a>
-                    <p class="responseface"></p>
                     <p>OR</p>
                     <input type="text" name="nombre" value="" id="nombre" placeholder="Nombre"/>
                     <input type="text" name="apellido" value="" id="apellido" placeholder="Apellido"/>
@@ -205,30 +211,32 @@
                 <button class="close-button">Close</button>
                 <div class="wrapp">
                     <header>
-                        <div class="icon"></div>
+                        <a href="#" class="close">
+                        <i class="icomoon icon-social_media"> </i>
+                        </a>
                     </header>
                     <div class="over-content">
                         <ul class="last social-network">
                             <li>
                                 <a href="https://twitter.com/FG_America" class="inappbrowser">
-                                    <i class="fa fa-twitter fa-2x"></i>
+                                    <i class="fa fa-twitter fa-2x"> </i>
                                 </a>
                             </li>
                             <li>
                                 <a href="https://www.facebook.com/pages/Maxx-DJ-Radio/744322262294401?ref=hl" class="inappbrowser">
-                                    <i class="fa fa-facebook fa-2x"></i>
+                                    <i class="fa fa-facebook fa-2x"> </i>
                                 </a>
                             </li>
                             <li>
                                 <a href="https://soundcloud.com/maxx-dj-radio" class="inappbrowser">
-                                    <i class="fa fa-soundcloud fa-2x"></i>
+                                    <i class="fa fa-soundcloud fa-2x"> </i>
                                 </a>
                             </li>
                             <li>
                                 <a href="https://www.mixcloud.com/MaxxDJRadio/" class="inappbrowser">
                                     <span class="">
-                                        <i class="fa fa-cloud fa-2x"></i>
-                                        <i class="fa fa-wifi fa-rotate-90 fa-1x"></i>
+                                        <i class="fa fa-cloud fa-2x"> </i>
+                                        <i class="fa fa-wifi fa-rotate-90 fa-1x"> </i>
                                     </span>
                                 </a>
                             </li>
@@ -253,11 +261,80 @@
                 <div class="wrapp">
                     <header>
                         <a href="#" class="close">
-                            <i class="fa fa-calendar-o"></i>
+                            <i class="icomoon icon-eventos"> </i>
                         </a>
                     </header>
                     <div class="over-content">
                         
+                    </div>
+                </div>
+            </div>
+
+            <div id="last10" class="page right">
+                <button class="close-button">Close</button>
+                <div class="wrapp">
+                    <header>
+                        <a href="#" class="close">
+                            <i class="icomoon icon-last10songs"> </i>
+                        </a>
+                    </header>
+                    <div class="over-content">
+                        <ul class="last">
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                            <li>
+                                <h3>Vanilla Ice</h3>
+                                <p>Ice Ice Baby</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="favs" class="page right">
+                <button class="close-button">Close</button>
+                <div class="wrapp">
+                    <header>
+                        <a href="#" class="close">
+                            <i class="icomoon icon-favorites"> </i>
+                        </a>
+                    </header>
+                    <div class="over-content">
+                         <ul class='last'><li><a href="#">Empty</a></li></ul>
                     </div>
                 </div>
             </div>
@@ -267,7 +344,7 @@
                 <div class="wrapp">
                     <header>
                         <a href="#" class="close">
-                            <i class="fa fa-picture-o"></i>
+                            <i class="icomoon icon-gallery"> </i>
                         </a>
                     </header>
                     <div class="over-content">
@@ -276,11 +353,44 @@
                 </div>
             </div>
 
+            <div id="webs" class="page right">
+                <button class="close-button">Close</button>
+                <div class="wrapp">
+                    <header>
+                        <a href="#" class="close">
+                            <i class="icomoon icon-websites"> </i>
+                        </a>
+                    </header>
+                    <div class="over-content">
+                        <ul>
+                            <li><a href="http://www.maxxdjradio.mx" class="inappbrowser">MaxxDjRadio Mexico</a></li>
+                            <li><a href="http://www.maxxdjradio.us" class="inappbrowser">MaxxDjRadio USA</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div id="shows" class="page right">
                 <button class="close-button">Close</button>
                 <div class="wrapp">
                     <header>
-                        <div class="icon"></div>
+                        <a href="#" class="close">
+                        <i class="icomoon icon-radio_show"> </i>
+                        </a>
+                    </header>
+                    <div class="over-content">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div id="podcast" class="page right">
+                <button class="close-button">Close</button>
+                <div class="wrapp">
+                    <header>
+                        <a href="#" class="close">
+                        <i class="icomoon icon-podcast"> </i>
+                        </a>
                     </header>
                     <div class="over-content">
                         
@@ -292,7 +402,9 @@
                 <button class="close-button">Close</button>
                 <div class="wrapp">
                     <header>
-                        <div class="icon"></div>
+                        <a href="#" class="close">
+                        <i class="icomoon icon-partners"> </i>
+                        </a>
                     </header>
                     <div class="over-content">
                         
@@ -304,7 +416,9 @@
                 <button class="close-button">Close</button>
                 <div class="wrapp">
                     <header>
-                        <div class="icon"></div>
+                        <a href="#" class="close">
+                        <i class="icomoon icon-contact"> </i>
+                        </a>
                     </header>
                     <div class="over-content">
                         <p class="message" style='text-align:center'></p>
@@ -322,15 +436,17 @@
                 <button class="close-button">Close</button>
                 <div class="wrapp">
                     <header>
-                        <div class="icon"></div>
+                        <a href="#" class="close">
+                        <i class="icomoon icon-info"> </i>
+                     </a>
                     </header>
                     <div class="over-content">
                         <div class="info">
                             <div class="wrapper">
                                 <h2>maxxdjradioamerica.com</h2>
                                 <p>
-                                    <a href="mailto:info@maxxdjradio.mx"><i class="fa fa-send"></i>info@maxxdjradio.mx</a><br />
-                                    <a href="+52 5566507662" type="phone"><i class="fa fa-phone"></i>+52 5566507662</a>
+                                    <a href="mailto:info@maxxdjradio.mx"><i class="fa fa-send"> </i>info@maxxdjradio.mx</a><br />
+                                    <a href="+52 5566507662" type="phone"><i class="fa fa-phone"> </i>+52 5566507662</a>
                                     <p>Oaxaca 96 Interior 103</br>Col. Roma Norte</br>CP: 06700</br>México DF</p>
                                 </p>
                                 <p class="copyright"></p>
@@ -349,10 +465,10 @@
     <script src="js/vendor/jquery-2.1.0.min.js"></script>
     <script src="js/vendor/jquery.jplayer.min.js"></script>
     <script src="js/vendor/swiper.jquery.js"></script>
-    <script src="js/vendor/swiper.js"></script>
     <script src="js/vendor/fastclick.js"></script>
     <script src="js/vendor/snap.svg-min.js"></script>
     <script src="js/vendor/openfb.js"></script>
+    <script src="js/jplayerfix.js"></script>
     <script src="js/config.js"></script>
     <script src="js/db.js"></script>
     <script src="js/utils.js"></script>
@@ -363,14 +479,6 @@
     });
     document.addEventListener("deviceready", App.init(), false);
     </script>
-    <script>
-        var googleId='UA-XXXXX-X';
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create',googleId);ga('send','pageview');
-    </script>
+
 </body>
 </html>

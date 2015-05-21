@@ -6,6 +6,7 @@ var Utils = (function(){
                     onComplete( position.coords.latitude, position.coords.longitude );
                 }
                 , function(error){
+                    onComplete( -1, -1 );
             });
         },
     }
